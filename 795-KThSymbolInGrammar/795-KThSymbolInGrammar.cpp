@@ -1,0 +1,14 @@
+// Last updated: 21/07/2026, 09:06:00
+class Solution {
+public:
+    int kthGrammar(int n, int k) {
+        if(n == 1){
+            return 0;
+        }
+
+        if(k <= pow(2,n-2)){
+            return kthGrammar(n-1,k);
+        }
+        return (1 - kthGrammar(n-1,k - pow(2,n-2)));
+    }
+};
