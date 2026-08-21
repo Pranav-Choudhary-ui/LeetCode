@@ -1,19 +1,26 @@
-// Last updated: 21/08/2026, 21:11:22
+// Last updated: 21/08/2026, 21:35:25
 1class Solution {
 2public:
 3    int countPrimes(int n) {
-4        vector<bool> prime(n+1,true);
-5        prime[0] = false;
-6        prime[1] = false;
-7        int count = 0;
-8        for(int i=2;i<n;i++){
-9            if(prime[i]==true){
-10                count++;
-11                for(int j=2*i;j<n;j=j+i){
-12                    prime[j] = false;
-13                }
-14            }
-15        }
-16        return count;
-17    }
-18};
+4        if (n < 3) {
+5            return 0;
+6        }
+7        bool isprime[n];
+8
+9        memset(isprime, true, n);
+10
+11        int result = n / 2;
+12        for (int i = 3; i * i < n; i += 2) {
+13            if (isprime[i]) {
+14                int d = i * 2;
+15                for (int j = i * i; j < n; j += d) {
+16                    if (isprime[j]) {
+17                        isprime[j] = false;
+18                        result--;
+19                    }
+20                }
+21            }
+22        }
+23        return result;
+24    }
+25};
