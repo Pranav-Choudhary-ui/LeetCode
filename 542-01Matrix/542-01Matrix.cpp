@@ -1,4 +1,4 @@
-// Last updated: 23/08/2026, 17:43:41
+// Last updated: 23/08/2026, 17:43:51
 1class Solution {
 2public:
 3
@@ -20,40 +20,37 @@
 19            m, vector<int>(n, -1)
 20        );
 21
-22        // Put ALL 0s into queue
-23        for(int i = 0; i < m; i++) {
-24            for(int j = 0; j < n; j++) {
-25
-26                if(mat[i][j] == 0) {
-27                    q.push({i, j});
-28                    dist[i][j] = 0;
-29                }
-30            }
-31        }
+22        for(int i = 0; i < m; i++) {
+23            for(int j = 0; j < n; j++) {
+24
+25                if(mat[i][j] == 0) {
+26                    q.push({i, j});
+27                    dist[i][j] = 0;
+28                }
+29            }
+30        }
+31        while(!q.empty()) {
 32
-33        // Multi-source BFS
-34        while(!q.empty()) {
+33            auto [y, x] = q.front();
+34            q.pop();
 35
-36            auto [y, x] = q.front();
-37            q.pop();
-38
-39            for(auto move : moves) {
+36            for(auto move : moves) {
+37
+38                int ny = y + move[0];
+39                int nx = x + move[1];
 40
-41                int ny = y + move[0];
-42                int nx = x + move[1];
-43
-44                if(ny >= 0 && ny < m &&
-45                   nx >= 0 && nx < n &&
-46                   dist[ny][nx] == -1) {
+41                if(ny >= 0 && ny < m &&
+42                   nx >= 0 && nx < n &&
+43                   dist[ny][nx] == -1) {
+44
+45                    dist[ny][nx] =
+46                        dist[y][x] + 1;
 47
-48                    dist[ny][nx] =
-49                        dist[y][x] + 1;
-50
-51                    q.push({ny, nx});
-52                }
-53            }
-54        }
-55
-56        return dist;
-57    }
-58};
+48                    q.push({ny, nx});
+49                }
+50            }
+51        }
+52
+53        return dist;
+54    }
+55};
