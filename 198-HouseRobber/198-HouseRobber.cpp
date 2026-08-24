@@ -1,25 +1,30 @@
-// Last updated: 12/08/2026, 22:27:57
-class Solution {
-public:
-    int dp[101];
-    int solve(vector<int>& nums, int n){
-        if(dp[n] != -1){
-            return dp[n];
-        }
-        if(n == 0){
-            return dp[n] = nums[n];
-        }
-        if(n == 1){
-            return dp[n] = max(nums[0], nums[1]);
-        }
-
-        int take = nums[n] + solve(nums, n-2);
-        int leave = solve(nums, n-1);
-        
-        return dp[n] = max(take, leave);
-    }
-    int rob(vector<int>& nums) {
-        memset(dp, -1, sizeof(dp));
-        return solve(nums, nums.size()-1);
-    }
-};
+// Last updated: 24/08/2026, 15:58:33
+1class Solution {
+2public:
+3    int dp[101];
+4    int solve(vector<int>& nums, int n){
+5        if(n < 0){
+6            return 0;
+7        }
+8        
+9        if(dp[n] != -1){
+10            return dp[n];
+11        }
+12        
+13        // if(n == 0){
+14        //     return dp[n] = nums[n];
+15        // }
+16        // if(n == 1){
+17        //     return dp[n] = max(nums[0], nums[1]);
+18        // }
+19
+20        int take = nums[n] + solve(nums, n-2);
+21        int leave = solve(nums, n-1);
+22        
+23        return dp[n] = max(take, leave);
+24    }
+25    int rob(vector<int>& nums) {
+26        memset(dp, -1, sizeof(dp));
+27        return solve(nums, nums.size()-1);
+28    }
+29};
