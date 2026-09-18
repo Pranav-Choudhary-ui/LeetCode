@@ -1,12 +1,12 @@
-// Last updated: 24/08/2026, 21:07:58
+// Last updated: 18/09/2026, 10:05:15
 1class Solution {
 2public:
 3    int dp[101][101];
 4    int possiblePaths(int m, int n, vector<vector<int>>& oG){
-5        if(oG[m][n] == 1){
+5        if(oG[m-1][n-1] == 1){
 6            return 0;
 7        }
-8        if(m == 0 && n == 0){
+8        if(m == 1 && n == 1){
 9            return 1;
 10        }
 11
@@ -14,11 +14,11 @@
 13            return dp[m][n];
 14        }
 15
-16        if(m == 0){
+16        if(m == 1){
 17            return dp[m][n] = possiblePaths(m, n-1, oG);
 18        }
 19
-20        if(n == 0){
+20        if(n == 1){
 21            return dp[m][n] = possiblePaths(m-1, n, oG);
 22        }
 23        return dp[m][n] = possiblePaths(m, n-1, oG) + possiblePaths(m-1, n, oG);
@@ -28,7 +28,7 @@
 27        int m = obstacleGrid.size();
 28        int n = obstacleGrid[0].size();
 29        memset(dp, -1, sizeof(dp));
-30        return possiblePaths(m-1, n-1, obstacleGrid);
+30        return possiblePaths(m, n, obstacleGrid);
 31    }
 32};
 33
