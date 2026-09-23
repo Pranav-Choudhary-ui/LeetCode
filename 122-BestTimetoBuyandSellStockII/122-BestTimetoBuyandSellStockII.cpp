@@ -1,22 +1,19 @@
-// Last updated: 23/09/2026, 11:43:53
+// Last updated: 23/09/2026, 12:11:45
 1class Solution {
 2public:
-3    int maximumUnits(vector<vector<int>>& boxTypes, int truckSize) {
-4        vector<pair<int, int>> arr;
-5        for(int i=0;i<boxTypes.size();i++){
-6            arr.push_back({boxTypes[i][1], boxTypes[i][0]});
-7        }
-8        sort(arr.rbegin(), arr.rend());
-9
-10        int units = 0;
-11        for(auto i:arr){
-12            if(i.second > truckSize){
-13                units += truckSize * i.first;
-14                break;
-15            }
-16            units += i.second * i.first;
-17            truckSize -= i.second;
-18        }
-19        return units;
-20    }
-21};
+3    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+4        if(n == 0){
+5            return true;
+6        }
+7        for(int i=0;i<flowerbed.size();i++){
+8            if(flowerbed[i] == 0 && (i == 0 || flowerbed[i-1] == 0) && (i == flowerbed.size()-1 || flowerbed[i+1] == 0 )){
+9                flowerbed[i] = 1;
+10                n--;
+11                if(n == 0){
+12                    return true;
+13                }
+14            }
+15        }
+16        return false;
+17    }
+18};
