@@ -1,22 +1,22 @@
-// Last updated: 23/09/2026, 12:22:08
+// Last updated: 23/09/2026, 12:50:42
 1class Solution {
 2public:
-3    int minimumCost(vector<int>& cost) {
-4        sort(cost.begin(), cost.end());
+3    int numRescueBoats(vector<int>& people, int limit) {
+4        sort(people.begin(), people.end());
 5
-6        int i = cost.size()-1;
-7        int count = 0;
-8        int total = 0;
-9        while(i>=0){
-10            if(count == 2){
-11                i--;
-12                count = 0;
-13                continue;
-14            }
-15            total += cost[i];
-16            count++;
-17            i--;
-18        }
-19        return total;
+6        int left = 0;
+7        int right = people.size() - 1;
+8        int boats = 0;
+9
+10        while(left <= right) {
+11            if(people[left] + people[right] <= limit) {
+12                left++;
+13            }
+14
+15            right--;
+16            boats++;
+17        }
+18
+19        return boats;
 20    }
 21};
