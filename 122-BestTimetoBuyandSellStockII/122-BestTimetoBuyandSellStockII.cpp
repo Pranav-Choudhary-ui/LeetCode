@@ -1,19 +1,22 @@
-// Last updated: 23/09/2026, 12:11:45
+// Last updated: 23/09/2026, 12:22:08
 1class Solution {
 2public:
-3    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
-4        if(n == 0){
-5            return true;
-6        }
-7        for(int i=0;i<flowerbed.size();i++){
-8            if(flowerbed[i] == 0 && (i == 0 || flowerbed[i-1] == 0) && (i == flowerbed.size()-1 || flowerbed[i+1] == 0 )){
-9                flowerbed[i] = 1;
-10                n--;
-11                if(n == 0){
-12                    return true;
-13                }
+3    int minimumCost(vector<int>& cost) {
+4        sort(cost.begin(), cost.end());
+5
+6        int i = cost.size()-1;
+7        int count = 0;
+8        int total = 0;
+9        while(i>=0){
+10            if(count == 2){
+11                i--;
+12                count = 0;
+13                continue;
 14            }
-15        }
-16        return false;
-17    }
-18};
+15            total += cost[i];
+16            count++;
+17            i--;
+18        }
+19        return total;
+20    }
+21};
