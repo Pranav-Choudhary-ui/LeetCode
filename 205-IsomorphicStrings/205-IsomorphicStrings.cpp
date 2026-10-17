@@ -1,27 +1,24 @@
-// Last updated: 21/07/2026, 09:07:07
-class Solution {
-public:
-    bool isIsomorphic(string s, string t) {
-        unordered_map<char, char> charMap;
-
-        for(int i=0;i<s.length();i++){
-            char sc = s[i];
-            char tc = t[i];
-
-            if(charMap.count(sc)){
-                if(charMap[sc] != tc){
-                    return false;
-                }
-            }
-            else{
-                for(auto& pair : charMap){
-                    if(pair.second == tc){
-                        return false;
-                    }
-                }
-                charMap[sc] = tc;
-            }
-        }
-        return true;
-    }
-};
+// Last updated: 17/10/2026, 18:53:56
+1class Solution {
+2public:
+3    bool isIsomorphic(string s, string t) {
+4        unordered_map<char, char> mp;
+5        unordered_set<char> used;
+6
+7        for (int i = 0; i < s.size(); i++) {
+8            char a = s[i], b = t[i];
+9
+10            if (mp.count(a)) {
+11                if (mp[a] != b) return false;
+12            } else {
+13                if (used.count(b)) return false;
+14
+15                mp[a] = b;
+16                used.insert(b);
+17            }
+18        }
+19
+20        return true;
+21    }
+22};
+23
